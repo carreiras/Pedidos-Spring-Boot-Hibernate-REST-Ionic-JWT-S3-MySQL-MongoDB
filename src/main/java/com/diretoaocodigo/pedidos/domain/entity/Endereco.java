@@ -1,6 +1,11 @@
 package com.diretoaocodigo.pedidos.domain.entity;
 
-public class Endereco {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Endereco implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
     private String logradouro;
@@ -9,11 +14,12 @@ public class Endereco {
     private String bairro;
     private String cep;
     private Cliente cliente;
+    private Cidade cidade;
 
     public Endereco() {
     }
 
-    public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cliente cliente) {
+    public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cliente cliente, Cidade cidade) {
         this.id = id;
         this.logradouro = logradouro;
         this.numero = numero;
@@ -21,6 +27,7 @@ public class Endereco {
         this.bairro = bairro;
         this.cep = cep;
         this.cliente = cliente;
+        this.cidade = cidade;
     }
 
     public Integer getId() {
@@ -77,5 +84,26 @@ public class Endereco {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Endereco endereco = (Endereco) o;
+        return getId().equals(endereco.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

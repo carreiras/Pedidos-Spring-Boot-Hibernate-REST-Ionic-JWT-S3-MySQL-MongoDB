@@ -2,18 +2,18 @@ package com.diretoaocodigo.pedidos.domain.entity;
 
 import com.diretoaocodigo.pedidos.domain.enums.TipoCliente;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
 
-public class Cliente {
+public class Cliente implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
     private String nome;
     private String email;
     private String cpfCnpj;
-    private TipoCliente tipo;
+    private Integer tipo;
     private List<Endereco> enderecos = new ArrayList<>();
     private Set<String> telefones = new HashSet<>();
 
@@ -25,7 +25,7 @@ public class Cliente {
         this.nome = nome;
         this.email = email;
         this.cpfCnpj = cpfCnpj;
-        this.tipo = tipo;
+        this.tipo = tipo.getCod();
     }
 
     public Integer getId() {
@@ -61,11 +61,11 @@ public class Cliente {
     }
 
     public TipoCliente getTipo() {
-        return tipo;
+        return TipoCliente.toEnum(this.tipo);
     }
 
     public void setTipo(TipoCliente tipo) {
-        this.tipo = tipo;
+        this.tipo = tipo.getCod();
     }
 
     public List<Endereco> getEnderecos() {
@@ -82,5 +82,18 @@ public class Cliente {
 
     public void setTelefones(Set<String> telefones) {
         this.telefones = telefones;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return getId().equals(cliente.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
