@@ -2,6 +2,9 @@ package com.diretoaocodigo.pedidos.domain.entity;
 
 import com.diretoaocodigo.pedidos.domain.enums.EstadoPagamento;
 
+import javax.persistence.Entity;
+
+@Entity
 public class PagamentoComCartao extends Pagamento {
 
     private static final long serialVersionUID = 1L;
