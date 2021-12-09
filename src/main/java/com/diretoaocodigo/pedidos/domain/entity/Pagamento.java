@@ -1,7 +1,7 @@
 package com.diretoaocodigo.pedidos.domain.entity;
 
 import com.diretoaocodigo.pedidos.domain.enums.EstadoPagamento;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,10 +17,10 @@ public abstract class Pagamento implements Serializable {
     private Integer id;
     private Integer estado;
 
-    @JsonBackReference
+    @JsonIgnore
     @MapsId
     @OneToOne
-    @JoinColumn(name="pedido_id")
+    @JoinColumn(name = "pedido_id")
     private Pedido pedido;
 
     public Pagamento() {
