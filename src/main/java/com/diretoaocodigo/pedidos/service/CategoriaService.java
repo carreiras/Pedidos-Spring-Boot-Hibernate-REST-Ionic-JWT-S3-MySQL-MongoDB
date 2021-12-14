@@ -2,8 +2,10 @@ package com.diretoaocodigo.pedidos.service;
 
 import com.diretoaocodigo.pedidos.domain.entity.Categoria;
 import com.diretoaocodigo.pedidos.domain.repository.CategoriaRepository;
+import com.diretoaocodigo.pedidos.exception.DataIntegratyException;
 import com.diretoaocodigo.pedidos.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -32,6 +34,10 @@ public class CategoriaService {
 
     public void delete(Integer id) {
         this.find(id);
-        categoriaRepository.deleteById(id);
+        try {
+            categoriaRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegratyException("Não é possível excluir uma Categoria que possui produtos.");
+        }
     }
 }
