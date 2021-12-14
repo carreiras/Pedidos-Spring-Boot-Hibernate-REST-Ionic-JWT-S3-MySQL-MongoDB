@@ -29,4 +29,9 @@ public class CategoriaService {
         this.find(categoria.getId());
         return categoriaRepository.save(categoria);
     }
+
+    public void delete(Integer id) {
+        this.find(id);
+        categoriaRepository.deleteById(id);
+    }
 }
