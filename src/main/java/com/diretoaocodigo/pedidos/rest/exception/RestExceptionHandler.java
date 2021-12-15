@@ -28,7 +28,7 @@ public class RestExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<StandardError> handlerMethodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
-        ValidationError validationError = new ValidationError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+        ValidationError validationError = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de validação", System.currentTimeMillis());
         for (FieldError x : e.getBindingResult().getFieldErrors()) {
             validationError.addError(x.getField(), x.getDefaultMessage());
         }
