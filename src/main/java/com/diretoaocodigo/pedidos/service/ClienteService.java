@@ -28,13 +28,13 @@ public class ClienteService {
     }
 
     public Cliente update(Cliente cliente) {
-        Cliente clienteToUpdate = this.find(cliente.getId());
-        this.updateData(clienteToUpdate, cliente);
+        Cliente clienteToUpdate = find(cliente.getId());
+        updateData(clienteToUpdate, cliente);
         return clienteRepository.save(clienteToUpdate);
     }
 
     public void delete(Integer id) {
-        this.find(id);
+        find(id);
         try {
             clienteRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {

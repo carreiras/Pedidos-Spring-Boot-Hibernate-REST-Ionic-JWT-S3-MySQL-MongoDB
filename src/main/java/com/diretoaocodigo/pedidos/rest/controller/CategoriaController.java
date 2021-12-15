@@ -52,9 +52,8 @@ public class CategoriaController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<CategoriaDto>> findAll() {
         List<Categoria> categoriaList = categoriaService.findAll();
-        List<CategoriaDto> categoriaDtoList =
-                categoriaList.stream().map(categoria -> new CategoriaDto(categoria)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(categoriaDtoList);
+        List<CategoriaDto> categoriaListDto = categoriaList.stream().map(categoria -> new CategoriaDto(categoria)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(categoriaListDto);
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
@@ -64,7 +63,7 @@ public class CategoriaController {
             @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
         Page<Categoria> categoriaPage = categoriaService.findPage(page, linesPerPage, orderBy, direction);
-        Page<CategoriaDto> categoriaDtoPage = categoriaPage.map(categoria -> new CategoriaDto(categoria));
-        return ResponseEntity.ok().body(categoriaDtoPage);
+        Page<CategoriaDto> categoriaPageDto = categoriaPage.map(categoria -> new CategoriaDto(categoria));
+        return ResponseEntity.ok().body(categoriaPageDto);
     }
 }

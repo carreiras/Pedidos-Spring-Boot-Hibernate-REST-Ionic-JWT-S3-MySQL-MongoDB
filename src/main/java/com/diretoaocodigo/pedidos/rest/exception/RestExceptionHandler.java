@@ -15,34 +15,22 @@ import javax.servlet.http.HttpServletRequest;
 public class RestExceptionHandler {
 
     @ExceptionHandler(ObjectNotFoundException.class)
-    public ResponseEntity<StandardError> handlerObjectNotFoundException(
-            ObjectNotFoundException e,
-            HttpServletRequest request
-    ) {
-        StandardError standardError =
-                new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
+    public ResponseEntity<StandardError> handlerObjectNotFoundException(ObjectNotFoundException e, HttpServletRequest request) {
+        StandardError standardError = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(standardError);
     }
 
     @ExceptionHandler(DataIntegratyException.class)
-    public ResponseEntity<StandardError> handlerDataIntegratyException(
-            DataIntegratyException e,
-            HttpServletRequest request
-    ) {
-        StandardError standardError =
-                new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+    public ResponseEntity<StandardError> handlerDataIntegratyException(DataIntegratyException e, HttpServletRequest request) {
+        StandardError standardError = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(standardError);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<StandardError> handlerMethodArgumentNotValidException(
-            MethodArgumentNotValidException e,
-            HttpServletRequest request
-    ) {
-        ValidationError validationError =
-                new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de validação", System.currentTimeMillis());
-        for (FieldError x : e.getBindingResult().getFieldErrors()) {
-            validationError.addError(x.getField(), x.getDefaultMessage());
+    public ResponseEntity<StandardError> handlerMethodArgumentNotValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
+        ValidationError validationError = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de validação", System.currentTimeMillis());
+        for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
+            validationError.addError(fieldError.getField(), fieldError.getDefaultMessage());
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationError);
     }

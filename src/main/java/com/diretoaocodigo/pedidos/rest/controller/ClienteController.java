@@ -42,9 +42,8 @@ public class ClienteController {
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<ClienteDto>> findAll() {
         List<Cliente> clienteList = clienteService.findAll();
-        List<ClienteDto> clienteDtoList =
-                clienteList.stream().map(cliente -> new ClienteDto(cliente)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(clienteDtoList);
+        List<ClienteDto> clienteListDto = clienteList.stream().map(cliente -> new ClienteDto(cliente)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(clienteListDto);
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
@@ -54,7 +53,7 @@ public class ClienteController {
             @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
         Page<Cliente> clientePage = clienteService.findPage(page, linesPerPage, orderBy, direction);
-        Page<ClienteDto> clienteDtoPage = clientePage.map(cliente -> new ClienteDto(cliente));
-        return ResponseEntity.ok().body(clienteDtoPage);
+        Page<ClienteDto> clientePageDto = clientePage.map(cliente -> new ClienteDto(cliente));
+        return ResponseEntity.ok().body(clientePageDto);
     }
 }

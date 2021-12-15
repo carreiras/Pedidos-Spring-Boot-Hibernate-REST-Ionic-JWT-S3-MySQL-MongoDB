@@ -33,13 +33,13 @@ public class CategoriaService {
     }
 
     public Categoria update(Categoria categoria) {
-        Categoria categoriaToUpdate = this.find(categoria.getId());
-        this.updateData(categoriaToUpdate, categoria);
+        Categoria categoriaToUpdate = find(categoria.getId());
+        updateData(categoriaToUpdate, categoria);
         return categoriaRepository.save(categoriaToUpdate);
     }
 
     public void delete(Integer id) {
-        this.find(id);
+        find(id);
         try {
             categoriaRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
