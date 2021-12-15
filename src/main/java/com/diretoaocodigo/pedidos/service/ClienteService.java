@@ -1,11 +1,9 @@
 package com.diretoaocodigo.pedidos.service;
 
-import com.diretoaocodigo.pedidos.domain.entity.Categoria;
 import com.diretoaocodigo.pedidos.domain.entity.Cliente;
 import com.diretoaocodigo.pedidos.domain.repository.ClienteRepository;
 import com.diretoaocodigo.pedidos.exception.DataIntegratyException;
 import com.diretoaocodigo.pedidos.exception.ObjectNotFoundException;
-import com.diretoaocodigo.pedidos.rest.dto.CategoriaDto;
 import com.diretoaocodigo.pedidos.rest.dto.ClienteDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -30,8 +28,14 @@ public class ClienteService {
     }
 
     public Cliente update(Cliente cliente) {
-        this.find(cliente.getId());
-        return clienteRepository.save(cliente);
+        Cliente clienteToUpdate = this.find(cliente.getId());
+        this.updateData(clienteToUpdate, cliente);
+        return clienteRepository.save(clienteToUpdate);
+    }
+
+    private void updateData(Cliente clienteToUpdate, Cliente cliente) {
+        clienteToUpdate.setNome(cliente.getNome());
+        clienteToUpdate.setEmail(cliente.getEmail());
     }
 
     public void delete(Integer id) {
