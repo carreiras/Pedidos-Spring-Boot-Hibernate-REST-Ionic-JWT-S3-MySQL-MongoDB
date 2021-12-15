@@ -4,6 +4,7 @@ import com.diretoaocodigo.pedidos.domain.entity.Categoria;
 import com.diretoaocodigo.pedidos.domain.repository.CategoriaRepository;
 import com.diretoaocodigo.pedidos.exception.DataIntegratyException;
 import com.diretoaocodigo.pedidos.exception.ObjectNotFoundException;
+import com.diretoaocodigo.pedidos.rest.dto.CategoriaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -52,5 +53,9 @@ public class CategoriaService {
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return categoriaRepository.findAll(pageRequest);
+    }
+
+    public Categoria fromDTO(CategoriaDTO categoriaDTO) {
+        return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
     }
 }
