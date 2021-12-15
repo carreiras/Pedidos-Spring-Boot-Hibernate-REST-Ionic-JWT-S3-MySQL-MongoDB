@@ -25,12 +25,11 @@ public class ClienteController {
         return ResponseEntity.ok().body(cliente);
     }
 
-
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@PathVariable Integer id, @Valid @RequestBody ClienteDto clienteDto) {
         Cliente cliente = clienteService.fromDTO(clienteDto);
         cliente.setId(id);
-        cliente = clienteService.update(cliente);
+        clienteService.update(cliente);
         return ResponseEntity.noContent().build();
     }
 
