@@ -1,6 +1,5 @@
 package com.diretoaocodigo.pedidos.rest.dto;
 
-import com.diretoaocodigo.pedidos.domain.entity.Categoria;
 import com.diretoaocodigo.pedidos.domain.entity.Cliente;
 import org.hibernate.validator.constraints.Length;
 
