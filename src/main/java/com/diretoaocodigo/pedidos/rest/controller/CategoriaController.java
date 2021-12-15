@@ -39,7 +39,7 @@ public class CategoriaController {
     public ResponseEntity<Void> update(@PathVariable Integer id,@Valid  @RequestBody CategoriaDTO categoriaDTO) {
         Categoria categoria = categoriaService.fromDTO(categoriaDTO);
         categoria.setId(id);
-        Categoria updated = categoriaService.update(categoria);
+        categoria = categoriaService.update(categoria);
         return ResponseEntity.noContent().build();
     }
 
