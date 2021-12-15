@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
-public class CategoriaDTO implements Serializable {
+public class CategoriaDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -16,10 +16,10 @@ public class CategoriaDTO implements Serializable {
     @Length(min = 5, max = 80, message = "O tamanho deve ser entre 5 e 80 caracteres.")
     private String nome;
 
-    public CategoriaDTO() {
+    public CategoriaDto() {
     }
 
-    public CategoriaDTO(Categoria categoria) {
+    public CategoriaDto(Categoria categoria) {
         this.id = categoria.getId();
         this.nome = categoria.getNome();
     }
