@@ -30,8 +30,8 @@ public class CategoriaController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO) {
         Categoria categoria = categoriaService.fromDTO(categoriaDTO);
-        Categoria saved = categoriaService.insert(categoria);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(saved.getId()).toUri();
+        categoria = categoriaService.insert(categoria);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
