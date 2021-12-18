@@ -1,11 +1,13 @@
 package com.diretoaocodigo.pedidos.rest.dto;
 
+import com.diretoaocodigo.pedidos.service.validation.ClienteInsert;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClienteInsert
 public class ClienteNewDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
