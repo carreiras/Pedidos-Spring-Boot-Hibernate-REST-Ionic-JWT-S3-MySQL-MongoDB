@@ -1,6 +1,9 @@
 package com.diretoaocodigo.pedidos.config;
 
 import com.diretoaocodigo.pedidos.service.DBService;
+import com.diretoaocodigo.pedidos.service.EmailService;
+import com.diretoaocodigo.pedidos.service.MockEmailService;
+import com.diretoaocodigo.pedidos.service.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -27,5 +30,10 @@ public class DevConfig {
 
         dbService.instantiateTestDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService() {
+        return new SmtpEmailService();
     }
 }
