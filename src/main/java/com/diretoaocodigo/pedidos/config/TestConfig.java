@@ -29,8 +29,8 @@ public class TestConfig {
         return new MockEmailService();
     }
 
-    @Bean
-    public TemplateEngine templateEngine() {
-        return new TemplateEngine();
-    }
+//    @Bean
+//    public TemplateEngine templateEngine() {
+//        return new TemplateEngine();
+//    }
 }
