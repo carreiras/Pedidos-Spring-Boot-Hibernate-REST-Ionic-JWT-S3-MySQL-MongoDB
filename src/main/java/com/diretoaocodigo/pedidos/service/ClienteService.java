@@ -15,6 +15,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,9 @@ import java.util.Optional;
 
 @Service
 public class ClienteService {
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -69,13 +73,25 @@ public class ClienteService {
     }
 
     public Cliente fromDTO(ClienteDto clienteDto) {
-        return new Cliente(clienteDto.getId(), clienteDto.getNome(), clienteDto.getEmail(), null, null);
+        return new Cliente(clienteDto.getId(), clienteDto.getNome(), clienteDto.getEmail(), null, null, null);
     }
 
     public Cliente fromDTO(ClienteNewDto clienteNewDto) {
-        Cliente cliente = new Cliente(null, clienteNewDto.getNome(), clienteNewDto.getEmail(), clienteNewDto.getCpfCnpj(), TipoCliente.toEnum(clienteNewDto.getTipo()));
+        Cliente cliente = new Cliente(null,
+                clienteNewDto.getNome(),
+                clienteNewDto.getEmail(),
+                clienteNewDto.getCpfCnpj(),
+                TipoCliente.toEnum(clienteNewDto.getTipo()),
+                bCryptPasswordEncoder.encode(clienteNewDto.getSenha()));
         Cidade cidade = new Cidade(clienteNewDto.getCidadeId(), null, null);
-        Endereco endereco = new Endereco(null, clienteNewDto.getLogradouro(), clienteNewDto.getNumero(), clienteNewDto.getComplemento(), clienteNewDto.getBairro(), clienteNewDto.getCep(), cliente, cidade);
+        Endereco endereco = new Endereco(null,
+                clienteNewDto.getLogradouro(),
+                clienteNewDto.getNumero(),
+                clienteNewDto.getComplemento(),
+                clienteNewDto.getBairro(),
+                clienteNewDto.getCep(),
+                cliente,
+                cidade);
         cliente.getEnderecos().add(endereco);
         cliente.getTelefones().add(clienteNewDto.getTelefone1());
         if (clienteNewDto.getTelefone2() != null) {
