@@ -2,13 +2,13 @@ package com.diretoaocodigo.pedidos.config;
 
 import com.diretoaocodigo.pedidos.service.DBService;
 import com.diretoaocodigo.pedidos.service.EmailService;
-import com.diretoaocodigo.pedidos.service.MockEmailService;
 import com.diretoaocodigo.pedidos.service.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.thymeleaf.TemplateEngine;
 
 import java.text.ParseException;
 
@@ -36,4 +36,9 @@ public class DevConfig {
     public EmailService emailService() {
         return new SmtpEmailService();
     }
+
+//    @Bean
+//    public TemplateEngine templateEngine() {
+//        return new TemplateEngine();
+//    }
 }
