@@ -1,7 +1,7 @@
 package com.diretoaocodigo.pedidos.security;
 
 
-import com.diretoaocodigo.pedidos.rest.dto.CredenciaisDTO;
+import com.diretoaocodigo.pedidos.rest.dto.CredenciaisDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,7 +34,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public Authentication attemptAuthentication(HttpServletRequest req,
                                                 HttpServletResponse res) throws AuthenticationException {
         try {
-            CredenciaisDTO creds = new ObjectMapper().readValue(req.getInputStream(), CredenciaisDTO.class);
+            CredenciaisDto creds = new ObjectMapper().readValue(req.getInputStream(), CredenciaisDto.class);
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(creds.getEmail(), creds.getSenha(), new ArrayList<>());
             Authentication auth = authenticationManager.authenticate(authToken);
             return auth;
