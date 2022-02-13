@@ -3,13 +3,16 @@ package com.diretoaocodigo.pedidos.service;
 import com.diretoaocodigo.pedidos.domain.entity.Cidade;
 import com.diretoaocodigo.pedidos.domain.entity.Cliente;
 import com.diretoaocodigo.pedidos.domain.entity.Endereco;
+import com.diretoaocodigo.pedidos.domain.enums.Perfil;
 import com.diretoaocodigo.pedidos.domain.enums.TipoCliente;
 import com.diretoaocodigo.pedidos.domain.repository.ClienteRepository;
 import com.diretoaocodigo.pedidos.domain.repository.EnderecoRepository;
+import com.diretoaocodigo.pedidos.exception.AuthorizationException;
 import com.diretoaocodigo.pedidos.exception.DataIntegratyException;
 import com.diretoaocodigo.pedidos.exception.ObjectNotFoundException;
 import com.diretoaocodigo.pedidos.rest.dto.ClienteDto;
 import com.diretoaocodigo.pedidos.rest.dto.ClienteNewDto;
+import com.diretoaocodigo.pedidos.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -35,6 +38,13 @@ public class ClienteService {
     private EnderecoRepository enderecoRepository;
 
     public Cliente find(Integer id) {
+
+        UserSS user = UserService.authenticated();
+
+        if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
+            throw new AuthorizationException("Acesso negado");
+        }
+
         Optional<Cliente> cliente = clienteRepository.findById(id);
         return cliente.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id +
                 ", Tipo: " + Cliente.class.getName()));

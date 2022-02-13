@@ -1,5 +1,6 @@
 package com.diretoaocodigo.pedidos.rest.exception;
 
+import com.diretoaocodigo.pedidos.exception.AuthorizationException;
 import com.diretoaocodigo.pedidos.exception.DataIntegratyException;
 import com.diretoaocodigo.pedidos.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -33,5 +34,11 @@ public class RestExceptionHandler {
             validationError.addError(fieldError.getField(), fieldError.getDefaultMessage());
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationError);
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StandardError> authorization(AuthorizationException e, HttpServletRequest request) {
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
     }
 }
