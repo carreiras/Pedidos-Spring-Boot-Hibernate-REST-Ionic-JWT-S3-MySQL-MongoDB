@@ -1,5 +1,6 @@
 package com.diretoaocodigo.pedidos.service;
 
+import com.diretoaocodigo.pedidos.domain.entity.Cliente;
 import com.diretoaocodigo.pedidos.domain.entity.ItemPedido;
 import com.diretoaocodigo.pedidos.domain.entity.PagamentoComBoleto;
 import com.diretoaocodigo.pedidos.domain.entity.Pedido;
@@ -7,8 +8,13 @@ import com.diretoaocodigo.pedidos.domain.enums.EstadoPagamento;
 import com.diretoaocodigo.pedidos.domain.repository.ItemPedidoRepository;
 import com.diretoaocodigo.pedidos.domain.repository.PagamentoRepository;
 import com.diretoaocodigo.pedidos.domain.repository.PedidoRepository;
+import com.diretoaocodigo.pedidos.exception.AuthorizationException;
 import com.diretoaocodigo.pedidos.exception.ObjectNotFoundException;
+import com.diretoaocodigo.pedidos.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,5 +78,15 @@ public class PedidoService {
 //        emailService.sendOrderConfirmationEmail(pedido);
         emailService.sendOrderConfirmationHtmlEmail(pedido);
         return pedido;
+    }
+
+    public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationException("Acesso negado");
+        }
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+        Cliente cliente =  clienteService.find(user.getId());
+        return pedidoRepository.findByCliente(cliente, pageRequest);
     }
 }
