@@ -1,8 +1,6 @@
 package com.diretoaocodigo.pedidos.rest.controller;
 
-import com.diretoaocodigo.pedidos.domain.entity.Categoria;
 import com.diretoaocodigo.pedidos.domain.entity.Cliente;
-import com.diretoaocodigo.pedidos.rest.dto.CategoriaDto;
 import com.diretoaocodigo.pedidos.rest.dto.ClienteDto;
 import com.diretoaocodigo.pedidos.rest.dto.ClienteNewDto;
 import com.diretoaocodigo.pedidos.service.ClienteService;
@@ -11,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -72,5 +71,11 @@ public class ClienteController {
         Page<Cliente> clientePage = clienteService.findPage(page, linesPerPage, orderBy, direction);
         Page<ClienteDto> clientePageDto = clientePage.map(cliente -> new ClienteDto(cliente));
         return ResponseEntity.ok().body(clientePageDto);
+    }
+
+    @RequestMapping(value = "/picture", method = RequestMethod.POST)
+    public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name = "file") MultipartFile file) {
+        URI uri = clienteService.uploadProfilePicture(file);
+        return ResponseEntity.created(uri).build();
     }
 }
