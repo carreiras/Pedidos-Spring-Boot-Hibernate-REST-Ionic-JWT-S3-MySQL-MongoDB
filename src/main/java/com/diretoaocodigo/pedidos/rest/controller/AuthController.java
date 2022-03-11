@@ -17,7 +17,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/auth")
-public class AuthResource {
+public class AuthController {
 
     @Autowired
     private JWTUtil jwtUtil;
