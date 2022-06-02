@@ -3,7 +3,6 @@ package com.ewecarreira.pedidos.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ewecarreira.pedidos.domain.entity.Categoria;
-import com.ewecarreira.pedidos.domain.entity.Pedido;
 import com.ewecarreira.pedidos.domain.entity.Produto;
 import com.ewecarreira.pedidos.domain.repository.CategoriaRepository;
 import com.ewecarreira.pedidos.domain.repository.ProdutoRepository;

@@ -7,11 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import com.ewecarreira.pedidos.domain.entity.Categoria;
-import com.ewecarreira.pedidos.domain.entity.Pedido;
 import com.ewecarreira.pedidos.domain.entity.Produto;
 import com.ewecarreira.pedidos.rest.controller.utils.URL;
-import com.ewecarreira.pedidos.rest.dto.CategoriaDto;
 import com.ewecarreira.pedidos.rest.dto.ProdutoDto;
 import com.ewecarreira.pedidos.service.ProdutoService;
 
