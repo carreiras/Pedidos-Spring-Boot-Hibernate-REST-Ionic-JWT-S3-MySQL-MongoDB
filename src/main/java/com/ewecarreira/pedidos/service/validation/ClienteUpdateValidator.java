@@ -29,6 +29,7 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean isValid(ClienteDto clienteDto, ConstraintValidatorContext constraintValidatorContext) {
         Map<String, String> map = (Map<String, String>) httpServletRequest.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
         Integer uriId = Integer.parseInt(map.get("id"));
