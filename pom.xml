@@ -14,7 +14,7 @@
     <artifactId>pedidos-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>pedidos-api</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Exemplo de micro serviço para estudo de JPA, Spring Security, Autenticação JWT, AWS, Jakarta, Jackson...</description>
 
     <properties>
         <java.version>11</java.version>
