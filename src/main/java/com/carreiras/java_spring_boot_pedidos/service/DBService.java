@@ -1,10 +1,28 @@
 package com.carreiras.java_spring_boot_pedidos.service;
 
-import com.carreiras.java_spring_boot_pedidos.domain.entity.*;
+import com.carreiras.java_spring_boot_pedidos.domain.entity.Categoria;
+import com.carreiras.java_spring_boot_pedidos.domain.entity.Cidade;
+import com.carreiras.java_spring_boot_pedidos.domain.entity.Cliente;
+import com.carreiras.java_spring_boot_pedidos.domain.entity.Endereco;
+import com.carreiras.java_spring_boot_pedidos.domain.entity.Estado;
+import com.carreiras.java_spring_boot_pedidos.domain.entity.ItemPedido;
+import com.carreiras.java_spring_boot_pedidos.domain.entity.Pagamento;
+import com.carreiras.java_spring_boot_pedidos.domain.entity.PagamentoComBoleto;
+import com.carreiras.java_spring_boot_pedidos.domain.entity.PagamentoComCartao;
+import com.carreiras.java_spring_boot_pedidos.domain.entity.Pedido;
+import com.carreiras.java_spring_boot_pedidos.domain.entity.Produto;
 import com.carreiras.java_spring_boot_pedidos.domain.enums.EstadoPagamento;
 import com.carreiras.java_spring_boot_pedidos.domain.enums.Perfil;
 import com.carreiras.java_spring_boot_pedidos.domain.enums.TipoCliente;
-import com.carreiras.java_spring_boot_pedidos.domain.repository.*;
+import com.carreiras.java_spring_boot_pedidos.domain.repository.CategoriaRepository;
+import com.carreiras.java_spring_boot_pedidos.domain.repository.CidadeRepository;
+import com.carreiras.java_spring_boot_pedidos.domain.repository.ClienteRepository;
+import com.carreiras.java_spring_boot_pedidos.domain.repository.EnderecoRepository;
+import com.carreiras.java_spring_boot_pedidos.domain.repository.EstadoRepository;
+import com.carreiras.java_spring_boot_pedidos.domain.repository.ItemPedidoRepository;
+import com.carreiras.java_spring_boot_pedidos.domain.repository.PagamentoRepository;
+import com.carreiras.java_spring_boot_pedidos.domain.repository.PedidoRepository;
+import com.carreiras.java_spring_boot_pedidos.domain.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,9 +30,6 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-
-import com.ewecarreira.pedidos.domain.entity.*;
-import com.ewecarreira.pedidos.domain.repository.*;
 
 @Service
 public class DBService {

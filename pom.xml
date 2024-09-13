@@ -17,8 +17,12 @@
     <description>Exemplo de micro serviço para estudo de JPA, Spring Security, Autenticação JWT, AWS, Jakarta, Jackson...</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
     </properties>
+
 
     <dependencies>
         <dependency>
@@ -82,17 +86,21 @@
             <version>0.7.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
-<!--            <version>LATEST</version>-->
+            <version>1.12.772</version>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>LATEST</version>
+            <version>2.16.1</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.imgscalr</groupId>
